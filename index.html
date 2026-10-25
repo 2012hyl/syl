@@ -6,43 +6,107 @@
 <title>孙逸林</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --ink: #14161a; --muted: #8a90a0; --ease: cubic-bezier(.22, .61, .36, 1); }
+
+  :root {
+    --ink: #14161a;
+    --muted: #8a90a0;
+    --ease: cubic-bezier(.22, .61, .36, 1);
+  }
+
   html, body { height: 100%; }
-  body { background: #ffffff; color: var(--ink); font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; -webkit-tap-highlight-color: transparent; }
-  
+
+  body {
+    background: #ffffff;
+    color: var(--ink);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* ============ 封面 ============ */
-  .cover { position: fixed; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(48px, 9vh, 88px); transition: opacity .9s var(--ease), transform .9s var(--ease), visibility .9s; }
+  .cover {
+    position: fixed; inset: 0; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: clamp(48px, 9vh, 88px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease), visibility .9s;
+  }
+
   .blobs { position: absolute; inset: 0; pointer-events: none; }
-  .blob { position: absolute; border-radius: 50%; filter: blur(60px); transform: translate(-50%, -50%) translate(var(--px, 0px), var(--py, 0px)); transition: transform 1.1s var(--ease); }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(60px);
+    transform: translate(-50%, -50%) translate(var(--px, 0px), var(--py, 0px));
+    transition: transform 1.1s var(--ease);
+  }
   .b1 { width: 38vmin; height: 38vmin; background: #c9dcff; opacity: .75; top: 63%; left: 50%; }
   .b2 { width: 27vmin; height: 27vmin; background: #ffd4e4; opacity: .70; top: 71%; left: 41%; }
   .b3 { width: 25vmin; height: 25vmin; background: #d3f2e3; opacity: .70; top: 69%; left: 61%; }
-  .name { position: relative; z-index: 2; font-size: clamp(3.4rem, 15vw, 11rem); font-weight: 700; line-height: 1; letter-spacing: .08em; text-indent: .08em; color: #0f1115; animation: rise 1.2s var(--ease) both; }
+
+  .name {
+    position: relative; z-index: 2;
+    font-size: clamp(3.4rem, 15vw, 11rem);
+    font-weight: 700; line-height: 1; letter-spacing: .08em; text-indent: .08em;
+    color: #0f1115; animation: rise 1.2s var(--ease) both;
+  }
+
   .btn-wrap { position: relative; z-index: 2; animation: rise 1.2s .15s var(--ease) both; }
-  
+
   /* ============ 玻璃质感按钮 ============ */
-  .glass-btn { position: relative; overflow: hidden; appearance: none; cursor: pointer; padding: 18px 52px; font-family: inherit; font-size: clamp(1rem, 1.5vw, 1.125rem); font-weight: 500; letter-spacing: .18em; text-indent: .18em; color: var(--ink); border-radius: 999px; border: 1px solid rgba(255, 255, 255, .85); background: rgba(255, 255, 255, .38); -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%); box-shadow: 0 10px 30px rgba(20, 22, 26, .10), 0 2px 6px rgba(20, 22, 26, .04), inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -10px 24px rgba(255, 255, 255, .45); transition: transform .45s var(--ease), box-shadow .45s var(--ease), background .45s var(--ease); -webkit-user-select: none; user-select: none; }
-  .glass-btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, .85) 48%, transparent 72%); transform: translateX(-130%); transition: transform .9s var(--ease); pointer-events: none; }
+  .glass-btn {
+    position: relative; overflow: hidden; appearance: none; cursor: pointer;
+    padding: 18px 52px; font-family: inherit; font-size: clamp(1rem, 1.5vw, 1.125rem);
+    font-weight: 500; letter-spacing: .18em; text-indent: .18em; color: var(--ink);
+    border-radius: 999px; border: 1px solid rgba(255, 255, 255, .85);
+    background: rgba(255, 255, 255, .38);
+    -webkit-backdrop-filter: blur(18px) saturate(180%); backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 10px 30px rgba(20, 22, 26, .10), 0 2px 6px rgba(20, 22, 26, .04), inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -10px 24px rgba(255, 255, 255, .45);
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease), background .45s var(--ease);
+    -webkit-user-select: none; user-select: none;
+  }
+  .glass-btn::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, .85) 48%, transparent 72%);
+    transform: translateX(-130%); transition: transform .9s var(--ease); pointer-events: none;
+  }
   .glass-btn span { position: relative; z-index: 1; }
   .glass-btn:hover { transform: translateY(-3px) scale(1.035); background: rgba(255, 255, 255, .58); }
   .glass-btn:hover::after { transform: translateX(130%); }
   .glass-btn:active { transform: translateY(-1px) scale(.99); }
-  
+
   /* ============ 进入后页面 ============ */
-  .page { position: fixed; inset: 0; z-index: 10; background: #ffffff; opacity: 0; visibility: hidden; transition: opacity .8s var(--ease), visibility .8s; padding: clamp(24px, 4vw, 64px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .page {
+    position: fixed; inset: 0; z-index: 10; background: #ffffff;
+    opacity: 0; visibility: hidden; transition: opacity .8s var(--ease), visibility .8s;
+    padding: clamp(24px, 4vw, 64px); 
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch;
+  }
+
   .content { display: flex; align-items: flex-start; gap: clamp(28px, 5vw, 72px); flex-wrap: wrap; max-width: 1440px; margin: 0 auto; }
-  
+
   /* ============ 图片轮播 ============ */
   .media-block { width: min(40vw, 450px); flex-shrink: 0; }
   .gallery { position: relative; width: 100%; height: min(38vh, 380px); }
-  .gallery img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; object-position: left top; opacity: 0; border-radius: 6px; transition: opacity .7s var(--ease); will-change: opacity; -webkit-user-drag: none; user-select: none; }
+  .gallery img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: contain; object-position: left top; opacity: 0; border-radius: 6px;
+    transition: opacity .7s var(--ease); will-change: opacity; -webkit-user-drag: none; user-select: none;
+  }
   .gallery img.active { opacity: 1; }
+
   .nav { display: flex; gap: 12px; margin-top: 18px; }
-  .nav-btn { width: 46px; height: 46px; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); border-radius: 50%; border: 1px solid rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .55); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%); box-shadow: 0 8px 22px rgba(20, 22, 26, .08), inset 0 1px 0 rgba(255, 255, 255, .95); transition: all .35s var(--ease); }
+  .nav-btn {
+    width: 46px; height: 46px; display: grid; place-items: center; padding: 0;
+    cursor: pointer; color: var(--ink); border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .55);
+    -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    box-shadow: 0 8px 22px rgba(20, 22, 26, .08), inset 0 1px 0 rgba(255, 255, 255, .95);
+    transition: all .35s var(--ease);
+  }
   .nav-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; transform: translateY(-2px); }
   .nav-btn:active { transform: translateY(0) scale(.94); }
   .nav-btn svg { display: block; }
-  
+
   /* ============ 个人信息 ============ */
   .info-col { flex: 1 1 420px; max-width: 680px; display: flex; flex-direction: column; gap: clamp(34px, 4vw, 52px); }
   .info .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: .72rem; font-weight: 600; letter-spacing: .32em; text-indent: .32em; color: #9aa0b0; margin-bottom: 26px; }
@@ -56,7 +120,7 @@
   .tags { display: flex; flex-wrap: wrap; gap: 10px; }
   .tag { padding: 9px 20px; font-size: .82rem; letter-spacing: .1em; color: #3a4152; border-radius: 999px; border: 1px solid rgba(20, 22, 26, .1); background: rgba(245, 246, 249, .9); transition: all .35s var(--ease); }
   .tag:hover { transform: translateY(-2px); border-color: rgba(20, 22, 26, .22); background: #ffffff; box-shadow: 0 8px 20px rgba(20, 22, 26, .08); }
-  
+
   /* ============ 奖状栏 ============ */
   .honors { padding-top: clamp(24px, 3vw, 34px); border-top: 1px solid rgba(20, 22, 26, .08); }
   .honors-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
@@ -72,16 +136,169 @@
   .honor-meta { font-size: .78rem; color: #9aa0b0; letter-spacing: .06em; margin-top: 3px; }
   .honor-year { flex-shrink: 0; font-size: .78rem; font-weight: 600; letter-spacing: .08em; color: #b0b5c2; }
   .honor.is-placeholder .honor-name, .honor.is-placeholder .honor-meta { color: #b8bdc8; font-style: italic; }
+
+  /* ============ 视频展示区（影院模式封面） ============ */
+  .video-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: clamp(40px, 6vw, 80px) auto 0;
+    padding-top: clamp(24px, 3vw, 34px);
+    border-top: 1px solid rgba(20, 22, 26, .08);
+  }
   
+  .video-cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+    box-shadow: 0 20px 40px rgba(20, 22, 26, .1);
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .video-cover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px rgba(20, 22, 26, .15);
+  }
+  
+  /* 用深色渐变遮罩替代视频第一帧，增加高级感 */
+  .video-cover::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+  }
+  
+  .video-cover .play-icon {
+    position: relative; z-index: 2;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .2);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, .4);
+    display: grid; place-items: center;
+    color: #fff;
+    transition: transform .3s var(--ease), background .3s;
+  }
+  .video-cover:hover .play-icon {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, .35);
+  }
+  
+  .video-cover .cover-text {
+    position: absolute; bottom: 24px; left: 32px; z-index: 2;
+    color: #fff; font-size: 1.2rem; letter-spacing: .1em; font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  /* ============ 沉浸式影院弹窗 ============ */
+  .cinema-modal {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(10, 11, 13, 0.85);
+    -webkit-backdrop-filter: blur(20px) saturate(120%); backdrop-filter: blur(20px) saturate(120%);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity .5s var(--ease), visibility .5s;
+    padding: 4vw;
+  }
+  .cinema-modal.show { opacity: 1; visibility: visible; }
+  
+  .cinema-player-wrap {
+    position: relative;
+    width: 100%; max-width: 1100px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+    transform: scale(0.95) translateY(20px);
+    transition: transform .5s var(--ease);
+  }
+  .cinema-modal.show .cinema-player-wrap { transform: scale(1) translateY(0); }
+  
+  /* 原生视频隐藏控制条，用我们的自定义 UI */
+  .cinema-player-wrap video {
+    width: 100%; height: 100%; object-fit: contain; outline: none; display: block;
+  }
+  
+  .cinema-close {
+    position: absolute; top: 24px; right: 24px; z-index: 10;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.1);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%; cursor: pointer;
+    display: grid; place-items: center;
+    color: #fff; transition: all .3s var(--ease);
+  }
+  .cinema-close:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
+
+  /* 自定义控制条（平时隐藏，鼠标移动/触摸时显示） */
+  .custom-controls {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 30px 24px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex; align-items: center; gap: 16px;
+    opacity: 0; transition: opacity .3s var(--ease);
+    z-index: 5;
+  }
+  .cinema-player-wrap:hover .custom-controls,
+  .cinema-player-wrap.paused .custom-controls { opacity: 1; }
+  
+  .v-ctrl-btn {
+    background: none; border: none; color: #fff; cursor: pointer;
+    display: grid; place-items: center; padding: 8px;
+    border-radius: 50%; transition: transform .2s;
+  }
+  .v-ctrl-btn:hover { transform: scale(1.1); }
+  
+  .v-progress-wrap {
+    flex: 1; display: flex; align-items: center; height: 20px;
+  }
+  
+  /* 自定义视频进度条 */
+  .v-progress-bar {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px; border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none; cursor: pointer;
+    overflow: hidden;
+    transition: height .2s;
+  }
+  .v-progress-wrap:hover .v-progress-bar { height: 6px; }
+  
+  .v-progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; cursor: pointer;
+    box-shadow: -1000px 0 0 990px rgba(255, 255, 255, 0.9); /* 高光进度填充 */
+  }
+  /* 兼容火狐 */
+  .v-progress-bar::-moz-range-thumb {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fff; cursor: pointer;
+  }
+  .v-progress-bar::-moz-range-progress {
+    background-color: rgba(255, 255, 255, 0.9); height: 6px;
+  }
+
   /* ============ 返回按钮 ============ */
-  .back-btn { position: absolute; right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vh, 56px); padding: 12px 30px; font-family: inherit; font-size: .88rem; letter-spacing: .12em; color: #6a7080; cursor: pointer; border-radius: 999px; border: 1px solid rgba(20, 22, 26, .12); background: rgba(255, 255, 255, .8); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transition: all .35s var(--ease); z-index: 20; }
+  .back-btn { 
+    position: absolute; right: clamp(20px, 4vw, 56px); bottom: clamp(20px, 4vh, 56px); 
+    padding: 12px 30px; font-family: inherit; font-size: .88rem; letter-spacing: .12em; 
+    color: #6a7080; cursor: pointer; border-radius: 999px; border: 1px solid rgba(20, 22, 26, .12); 
+    background: rgba(255, 255, 255, .8); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); 
+    transition: all .35s var(--ease); z-index: 20;
+  }
   .back-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; transform: translateY(-2px); }
-  
+
   /* ============ 隐蔽密码口 ============ */
   .secret-dot { position: fixed; left: 22px; bottom: 22px; width: 30px; height: 30px; border-radius: 50%; background: #14161a; opacity: 0; pointer-events: none; cursor: pointer; z-index: 40; transition: opacity .5s var(--ease), transform .5s var(--ease); }
   body.entered .secret-dot { opacity: .05; pointer-events: auto; }
   body.entered .secret-dot:hover { opacity: .3; transform: scale(1.18); }
-  
+
   /* ============ 密码弹窗 ============ */
   .modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; background: rgba(20, 22, 26, .26); -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s; }
   .modal.show { opacity: 1; visibility: visible; }
@@ -98,21 +315,30 @@
   .btn-ok { color: #fff; border: 1px solid var(--ink); background: var(--ink); }
   @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
   .shake { animation: shake .45s var(--ease); }
-  
+
   /* ============ 解锁后的大图 ============ */
   .unlocked { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 8px; background: #ffffff; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility .6s; }
   .unlocked.show { opacity: 1; visibility: visible; }
   .unlocked img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; -webkit-user-drag: none; user-select: none; }
   .unlocked-close { position: absolute; top: clamp(14px, 2.5vw, 26px); right: clamp(14px, 2.5vw, 26px); width: 46px; height: 46px; display: grid; place-items: center; cursor: pointer; color: var(--ink); border-radius: 50%; border: 1px solid rgba(20, 22, 26, .1); background: rgba(255, 255, 255, .75); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 8px 22px rgba(20, 22, 26, .1); transition: all .35s var(--ease); }
   .unlocked-close:hover { background: var(--ink); border-color: var(--ink); color: #fff; transform: rotate(90deg); }
-  
-  /* ============ 右上角迷你播放器 ============ */
-  .mini-player { position: fixed; top: clamp(16px, 3vw, 32px); right: clamp(16px, 3vw, 32px); z-index: 100; display: flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .65); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); box-shadow: 0 10px 30px rgba(20, 22, 26, .12), inset 0 1px 0 rgba(255, 255, 255, .95); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all .6s var(--ease); }
+
+  /* ============ 右上角迷你音乐播放器 ============ */
+  .mini-player {
+    position: fixed; top: clamp(16px, 3vw, 32px); right: clamp(16px, 3vw, 32px); z-index: 100;
+    display: flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px;
+    border-radius: 999px; border: 1px solid rgba(255, 255, 255, .9);
+    background: rgba(255, 255, 255, .65); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 10px 30px rgba(20, 22, 26, .12), inset 0 1px 0 rgba(255, 255, 255, .95);
+    opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all .6s var(--ease);
+  }
   body.entered .mini-player { opacity: 1; visibility: visible; transform: none; }
+
   .mini-cover { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.15); transition: transform .3s var(--ease); -webkit-user-drag: none; flex-shrink: 0; }
   .mini-cover:hover { transform: scale(1.08); }
   .mini-cover.spinning { animation: spin 8s linear infinite; animation-play-state: paused; }
   .mini-cover.playing { animation-play-state: running; }
+
   .mini-controls { display: flex; align-items: center; gap: 6px; }
   .ctrl-btn { background: none; border: none; cursor: pointer; display: grid; place-items: center; padding: 6px; color: var(--ink); border-radius: 50%; transition: background .2s, transform .2s; }
   .ctrl-btn:hover { background: rgba(0,0,0,0.05); }
@@ -120,8 +346,9 @@
   .progress-wrap { display: flex; align-items: center; width: 70px; margin-left: 4px; }
   .progress-bar { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: rgba(20, 22, 26, .15); outline: none; cursor: pointer; overflow: hidden; }
   .progress-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); cursor: pointer; box-shadow: -80px 0 0 80px var(--ink); }
+
   @keyframes spin { 100% { transform: rotate(360deg); } }
-  
+
   /* ============ 全屏唱片页 ============ */
   .disc-page { position: fixed; inset: 0; z-index: 110; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility .6s; cursor: pointer; }
   .disc-page.show { opacity: 1; visibility: visible; }
@@ -132,13 +359,15 @@
   .disc-hole { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; background: #fff; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: inset 0 2px 8px rgba(0,0,0,.3); border: 2px solid rgba(0,0,0,.08); }
   .disc-hint { position: absolute; bottom: 10%; color: var(--muted); font-size: .9rem; letter-spacing: .2em; animation: pulse 2s infinite; }
   @keyframes pulse { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
-  
+
   /* ============ 状态切换 ============ */
   body.entered .cover { opacity: 0; visibility: hidden; transform: scale(1.06); pointer-events: none; }
   body.entered .page { opacity: 1; visibility: visible; }
   @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-  
-  /* ============ 手机适配 ============ */
+
+  /* ========================================================= */
+  /* ================= 手机移动端适配优化 ==================== */
+  /* ========================================================= */
   @media (max-width: 900px) {
     .content { flex-direction: column; gap: 32px; }
     .media-block { width: 100%; }
@@ -150,11 +379,30 @@
     .info .bio { font-size: .95rem; line-height: 1.9; margin-bottom: 24px; }
     .honor { padding: 14px 16px; gap: 12px; }
     .honor-year { font-size: .75rem; }
-    .back-btn { position: static; display: block; width: fit-content; margin: 40px auto calc(20px + env(safe-area-inset-bottom)); }
+    .back-btn { 
+      position: static; display: block; width: fit-content;
+      margin: 40px auto calc(20px + env(safe-area-inset-bottom));
+    }
     .secret-dot { width: 36px; height: 36px; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
+    .video-cover { border-radius: 12px; }
+    .video-cover .cover-text { bottom: 16px; left: 20px; font-size: 1rem; }
+    
+    /* 影院弹窗移动端适配 */
+    .cinema-modal { padding: 16px; }
+    .cinema-player-wrap { border-radius: 12px; }
+    .cinema-close { top: 12px; right: 12px; width: 36px; height: 36px; }
+    .custom-controls { padding: 16px 12px 12px; gap: 8px; }
+    .v-progress-wrap { height: 24px; } /* 增大触控区 */
   }
+
   @media (max-width: 600px) {
-    .mini-player { top: 12px; right: 12px; flex-wrap: wrap; padding: 8px; border-radius: 16px; max-width: 210px; gap: 8px; }
+    .mini-player {
+      top: 12px; right: 12px;
+      flex-wrap: wrap;
+      padding: 8px; border-radius: 16px;
+      max-width: 210px;
+      gap: 8px;
+    }
     .mini-cover { width: 36px; height: 36px; }
     .mini-controls { flex: 1; justify-content: space-between; }
     .ctrl-btn { padding: 4px; }
@@ -164,11 +412,15 @@
     .disc-container { width: min(80vw, 320px); height: min(80vw, 320px); }
     .disc-hole { width: 32px; height: 32px; }
   }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01ms !important; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition-duration: .01ms !important; }
+  }
 </style>
 </head>
 <body>
 
+  <!-- ========== 封面 ========== -->
   <div class="cover" id="cover">
     <div class="blobs">
       <span class="blob b1"></span>
@@ -183,8 +435,10 @@
     </div>
   </div>
 
+  <!-- ========== 进入后 ========== -->
   <section class="page" id="page">
     <div class="content">
+      <!-- 左侧：图片轮播 -->
       <div class="media-block">
         <div class="gallery" id="gallery">
           <img src="https://i.ibb.co/96X1wHd/7180f2b02e4f6cbee4b53d01a0a9c41c.jpg" alt="" />
@@ -192,6 +446,7 @@
           <img src="https://i.ibb.co/WWq3gCch/ed344ba57712bc6cd33065b45c42f1ff.jpg" alt="" />
           <img src="https://i.ibb.co/C3r74MHj/f7aa3e1f28fe490accbf7fea353d39e1.jpg" alt="" />
         </div>
+
         <div class="nav">
           <button class="nav-btn" id="prev" type="button" aria-label="上一张">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
@@ -202,6 +457,7 @@
         </div>
       </div>
 
+      <!-- 右侧：个人信息 + 奖状栏 -->
       <div class="info-col">
         <div class="info">
           <span class="eyebrow">PROFILE</span>
@@ -242,11 +498,67 @@
         </div>
       </div>
     </div>
+
+    <!-- ========== 视频展示区（点击唤起影院模式） ========== -->
+    <div class="video-section">
+      <div class="honors-head">
+        <span class="honors-title">高光时刻</span>
+        <span class="honors-count">VIDEO SHOWCASE</span>
+      </div>
+      
+      <!-- 这是伪装的视频封面，点击触发弹窗 -->
+      <div class="video-cover" id="openCinema">
+        <div class="play-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="cover-text">点击播放 · 孙逸林的高光时刻</div>
+      </div>
+    </div>
+
     <button class="back-btn" id="back" type="button">返回封面</button>
   </section>
 
+  <!-- ========== 沉浸式影院弹窗 ========== -->
+  <div class="cinema-modal" id="cinemaModal">
+    <div class="cinema-player-wrap paused" id="cinemaWrap">
+      <!-- 原生视频标签（去掉了 controls 属性，完全由我们接管） -->
+      <video id="cinemaVideo" playsinline loop>
+        <source src="https://2012hyl.github.io/imgbed/videos/20261025_154316_a8o50k.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+      </video>
+
+      <!-- 关闭按钮 -->
+      <button class="cinema-close" id="closeCinema" aria-label="关闭">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+      </button>
+
+      <!-- 自定义高级控制条 -->
+      <div class="custom-controls" id="customControls">
+        <!-- 播放/暂停 -->
+        <button class="v-ctrl-btn" id="vPlayPauseBtn">
+          <svg id="vIconPlay" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="display:none;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <svg id="vIconPause" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+
+        <!-- 进度条 -->
+        <div class="v-progress-wrap">
+          <input type="range" class="v-progress-bar" id="vProgressBar" value="0" min="0" max="100" step="0.1">
+        </div>
+
+        <!-- 全屏按钮 -->
+        <button class="v-ctrl-btn" id="vFullscreenBtn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 隐蔽密码口 ========== -->
   <div class="secret-dot" id="secretDot" role="button" aria-label="隐藏入口"></div>
 
+  <!-- ========== 密码弹窗 ========== -->
   <div class="modal" id="pwdModal">
     <div class="modal-box" id="pwdBox">
       <p class="modal-title">请输入密码</p>
@@ -259,6 +571,7 @@
     </div>
   </div>
 
+  <!-- ========== 解锁后的大图 ========== -->
   <div class="unlocked" id="unlocked">
     <button class="unlocked-close" id="unlockedClose" type="button" aria-label="关闭">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -266,25 +579,31 @@
     <img src="https://i.ibb.co/fdYJFWW4/15886c6419465e2a760038d8aab7a060.jpg" alt="" />
   </div>
 
+  <!-- ========== 右上角迷你音乐播放器 ========== -->
   <div class="mini-player" id="miniPlayer">
     <img src="https://i.ibb.co/hJqWrZmG/f7aa3e1f28fe490accbf7fea353d39e1.jpg" class="mini-cover spinning" id="miniCover" alt="唱片封面" title="点击查看大唱片" />
+    
     <div class="mini-controls">
       <button class="ctrl-btn" id="rewindBtn" title="后退 5 秒">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l-3-3 3-3"/><path d="M15 12H6"/></svg>
       </button>
+      
       <button class="ctrl-btn" id="playPauseBtn" title="播放/暂停">
         <svg id="iconPlay" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display:none;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         <svg id="iconPause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
       </button>
+
       <button class="ctrl-btn" id="forwardBtn" title="前进 5 秒">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M15 12l3-3-3-3"/><path d="M9 12h9"/></svg>
       </button>
+
       <div class="progress-wrap">
         <input type="range" class="progress-bar" id="progressBar" value="0" min="0" max="100" step="0.1">
       </div>
     </div>
   </div>
 
+  <!-- ========== 全屏大唱片页 ========== -->
   <div class="disc-page" id="discPage">
     <div class="disc-container" id="discContainer">
       <img src="https://i.ibb.co/hJqWrZmG/f7aa3e1f28fe490accbf7fea353d39e1.jpg" alt="唱片封面" />
@@ -294,7 +613,7 @@
     <div class="disc-hint">点击任意位置返回</div>
   </div>
 
-  <!-- 替换为你刚刚提供的真实音频直链 -->
+  <!-- ========== 隐藏的音频元素 ========== -->
   <audio id="bgMusic" loop>
     <source src="https://2012hyl.github.io/imgbed/audios/20261024_120536_mdhwv5.mp3" type="audio/mpeg">
   </audio>
@@ -306,6 +625,7 @@
   const prevBtn    = document.getElementById('prev');
   const nextBtn    = document.getElementById('next');
   const imgs       = Array.from(document.querySelectorAll('#gallery img'));
+
   const secretDot  = document.getElementById('secretDot');
   const pwdModal   = document.getElementById('pwdModal');
   const pwdBox     = document.getElementById('pwdBox');
@@ -315,19 +635,103 @@
   const pwdOk      = document.getElementById('pwdOk');
   const unlocked   = document.getElementById('unlocked');
   const unlockedClose = document.getElementById('unlockedClose');
-  const PASSWORD = '35';
 
+  /* ================= 视频影院模式逻辑 ================= */
+  const openCinema    = document.getElementById('openCinema');
+  const cinemaModal   = document.getElementById('cinemaModal');
+  const closeCinema   = document.getElementById('closeCinema');
+  const cinemaVideo   = document.getElementById('cinemaVideo');
+  const cinemaWrap    = document.getElementById('cinemaWrap');
+  const vPlayPauseBtn = document.getElementById('vPlayPauseBtn');
+  const vIconPlay     = document.getElementById('vIconPlay');
+  const vIconPause    = document.getElementById('vIconPause');
+  const vProgressBar  = document.getElementById('vProgressBar');
+  const vFullscreenBtn= document.getElementById('vFullscreenBtn');
+
+  // 打开影院
+  openCinema.addEventListener('click', () => {
+    cinemaModal.classList.add('show');
+    cinemaVideo.play();
+  });
+
+  // 关闭影院
+  function closeCinemaFn() {
+    cinemaModal.classList.remove('show');
+    cinemaVideo.pause();
+  }
+  closeCinema.addEventListener('click', closeCinemaFn);
+  
+  // 点击遮罩关闭
+  cinemaModal.addEventListener('click', (e) => {
+    if (e.target === cinemaModal) closeCinemaFn();
+  });
+
+  // 播放/暂停 UI 联动
+  function updateVideoState(playing) {
+    if (playing) {
+      vIconPlay.style.display = 'none';
+      vIconPause.style.display = 'block';
+      cinemaWrap.classList.remove('paused');
+    } else {
+      vIconPlay.style.display = 'block';
+      vIconPause.style.display = 'none';
+      cinemaWrap.classList.add('paused');
+    }
+  }
+
+  cinemaVideo.addEventListener('play', () => updateVideoState(true));
+  cinemaVideo.addEventListener('pause', () => updateVideoState(false));
+
+  // 自定义播放按钮点击
+  vPlayPauseBtn.addEventListener('click', () => {
+    if (cinemaVideo.paused) cinemaVideo.play();
+    else cinemaVideo.pause();
+  });
+
+  // 点击视频画面也能暂停/播放
+  cinemaVideo.addEventListener('click', () => {
+    if (cinemaVideo.paused) cinemaVideo.play();
+    else cinemaVideo.pause();
+  });
+
+  // 进度条更新
+  cinemaVideo.addEventListener('timeupdate', () => {
+    if (!cinemaVideo.duration) return;
+    const percent = (cinemaVideo.currentTime / cinemaVideo.duration) * 100;
+    vProgressBar.value = percent;
+  });
+
+  // 拖拽进度条
+  vProgressBar.addEventListener('input', () => {
+    if (!cinemaVideo.duration) return;
+    cinemaVideo.currentTime = (vProgressBar.value / 100) * cinemaVideo.duration;
+  });
+
+  // 全屏功能
+  vFullscreenBtn.addEventListener('click', () => {
+    if (cinemaWrap.requestFullscreen) {
+      cinemaWrap.requestFullscreen();
+    } else if (cinemaWrap.webkitRequestFullscreen) { /* Safari */
+      cinemaWrap.webkitRequestFullscreen();
+    }
+  });
+
+  /* ================= 音乐与常规逻辑 ================= */
+  const PASSWORD = '35';
   imgs.forEach(img => { const i = new Image(); i.src = img.src; });
   let current = 0;
   let timer   = null;
   imgs[0].classList.add('active');
+
   function goNext() { imgs[current].classList.remove('active'); current = (current + 1) % imgs.length; imgs[current].classList.add('active'); }
   function goPrev() { imgs[current].classList.remove('active'); current = (current - 1 + imgs.length) % imgs.length; imgs[current].classList.add('active'); }
   function startSlideshow() { if (!timer) timer = setInterval(goNext, 2000); }
   function stopSlideshow() { clearInterval(timer); timer = null; }
   function resetTimer() { if (!body.classList.contains('entered')) return; clearInterval(timer); timer = setInterval(goNext, 2000); }
+
   prevBtn.addEventListener('click', () => { goPrev(); resetTimer(); });
   nextBtn.addEventListener('click', () => { goNext(); resetTimer(); });
+
   enterBtn.addEventListener('click', () => { body.classList.add('entered'); startSlideshow(); });
   backBtn.addEventListener('click', () => { body.classList.remove('entered'); stopSlideshow(); });
 
@@ -336,9 +740,13 @@
   secretDot.addEventListener('click', openPwd);
   pwdCancel.addEventListener('click', closePwd);
   pwdModal.addEventListener('click', (e) => { if (e.target === pwdModal) closePwd(); });
+
   function checkPwd() {
-    if (pwdInput.value.trim() === PASSWORD) { closePwd(); unlocked.classList.add('show'); }
-    else { pwdError.classList.add('show'); pwdBox.classList.remove('shake'); void pwdBox.offsetWidth; pwdBox.classList.add('shake'); pwdInput.value = ''; pwdInput.focus(); }
+    if (pwdInput.value.trim() === PASSWORD) { closePwd(); unlocked.classList.add('show'); } 
+    else {
+      pwdError.classList.add('show'); pwdBox.classList.remove('shake'); void pwdBox.offsetWidth; pwdBox.classList.add('shake');
+      pwdInput.value = ''; pwdInput.focus();
+    }
   }
   pwdOk.addEventListener('click', checkPwd);
   pwdInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkPwd(); });
@@ -356,25 +764,40 @@
   const discContainer = document.getElementById('discContainer');
 
   function updatePlayState(playing) {
-    if (playing) { iconPlay.style.display = 'none'; iconPause.style.display = 'block'; miniCover.classList.add('playing'); discContainer.classList.add('playing'); }
-    else { iconPlay.style.display = 'block'; iconPause.style.display = 'none'; miniCover.classList.remove('playing'); discContainer.classList.remove('playing'); }
+    if (playing) {
+      iconPlay.style.display = 'none'; iconPause.style.display = 'block';
+      miniCover.classList.add('playing'); discContainer.classList.add('playing');
+    } else {
+      iconPlay.style.display = 'block'; iconPause.style.display = 'none';
+      miniCover.classList.remove('playing'); discContainer.classList.remove('playing');
+    }
   }
-  playPauseBtn.addEventListener('click', () => {
-    if (bgMusic.paused) { bgMusic.play().catch(e => console.log('播放失败:', e)); }
-    else { bgMusic.pause(); }
-  });
+
+  playPauseBtn.addEventListener('click', () => { if (bgMusic.paused) bgMusic.play(); else bgMusic.pause(); });
   bgMusic.addEventListener('play', () => updatePlayState(true));
   bgMusic.addEventListener('pause', () => updatePlayState(false));
+
   rewindBtn.addEventListener('click', () => { bgMusic.currentTime = Math.max(0, bgMusic.currentTime - 5); });
   forwardBtn.addEventListener('click', () => { bgMusic.currentTime = Math.min(bgMusic.duration || 0, bgMusic.currentTime + 5); });
-  bgMusic.addEventListener('timeupdate', () => { if (!bgMusic.duration) return; const percent = (bgMusic.currentTime / bgMusic.duration) * 100; progressBar.value = percent; });
-  progressBar.addEventListener('input', () => { if (!bgMusic.duration) return; bgMusic.currentTime = (progressBar.value / 100) * bgMusic.duration; });
+
+  bgMusic.addEventListener('timeupdate', () => {
+    if (!bgMusic.duration) return;
+    const percent = (bgMusic.currentTime / bgMusic.duration) * 100;
+    progressBar.value = percent;
+  });
+
+  progressBar.addEventListener('input', () => {
+    if (!bgMusic.duration) return;
+    bgMusic.currentTime = (progressBar.value / 100) * bgMusic.duration;
+  });
 
   miniCover.addEventListener('click', () => discPage.classList.add('show'));
   discPage.addEventListener('click', () => discPage.classList.remove('show'));
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (discPage.classList.contains('show')) discPage.classList.remove('show');
+      if (cinemaModal.classList.contains('show')) closeCinemaFn();
+      else if (discPage.classList.contains('show')) discPage.classList.remove('show');
       else if (unlocked.classList.contains('show')) unlocked.classList.remove('show');
       else if (pwdModal.classList.contains('show')) closePwd();
     }
@@ -388,7 +811,11 @@
       raf = null;
       const x = e.clientX / window.innerWidth  - 0.5;
       const y = e.clientY / window.innerHeight - 0.5;
-      blobs.forEach((b, i) => { const d = (i + 1) * 18; b.style.setProperty('--px', (x * d).toFixed(2) + 'px'); b.style.setProperty('--py', (y * d).toFixed(2) + 'px'); });
+      blobs.forEach((b, i) => {
+        const d = (i + 1) * 18;
+        b.style.setProperty('--px', (x * d).toFixed(2) + 'px');
+        b.style.setProperty('--py', (y * d).toFixed(2) + 'px');
+      });
     });
   });
 </script>
