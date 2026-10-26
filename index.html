@@ -11,8 +11,6 @@
     --ink: #14161a;
     --muted: #8a90a0;
     --ease: cubic-bezier(.22, .61, .36, 1);
-    /* 穿越动画的贝塞尔曲线，前半段慢，后半段极快，产生“吸进去”的感觉 */
-    --zoom-ease: cubic-bezier(0.6, 0.05, 0.1, 1); 
   }
 
   html, body { height: 100%; }
@@ -31,24 +29,29 @@
     position: fixed; inset: 0; z-index: 1;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: clamp(40px, 8vh, 70px);
-    /* 注意：这里去掉了 transition，由专门的 animation 接管穿越效果 */
     transform-origin: center center;
+    /* 强制开启硬件加速，提升缩放性能 */
+    transform: translate3d(0,0,0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
 
   /* 穿越动画类 */
   .cover.zoom-through {
-    animation: zoomIntoChar 1.2s var(--zoom-ease) forwards;
-    pointer-events: none; /* 防止动画过程中误触 */
+    animation: zoomIntoChar 0.7s cubic-bezier(0.6, 0.05, 0.1, 1) forwards;
+    pointer-events: none;
   }
 
-  /* 核心穿越动画：放大 + 位移 + 渐隐 */
+  /* 核心穿越动画：去掉滤镜，纯靠 scale3d 和 opacity 极速放大 */
   @keyframes zoomIntoChar {
-    0% { transform: scale(1); opacity: 1; filter: blur(0); }
-    30% { transform: scale(1.5); opacity: 0.8; filter: blur(2px); }
-    100% { transform: scale(80); opacity: 0; filter: blur(20px); }
+    0% { transform: scale3d(1, 1, 1); opacity: 1; }
+    100% { transform: scale3d(80, 80, 1); opacity: 0; }
   }
 
-  .blobs { position: absolute; inset: 0; pointer-events: none; }
+  .blobs { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.4s var(--ease); }
+  /* 穿越时让模糊光斑迅速消失，防止放大后吃性能 */
+  .cover.zoom-through .blobs { opacity: 0; }
+  
   .blob {
     position: absolute; border-radius: 50%; filter: blur(60px);
     transform: translate(-50%, -50%) translate(var(--px, 0px), var(--py, 0px));
@@ -65,7 +68,6 @@
     flex-direction: column;
     align-items: center;
     gap: clamp(16px, 3vh, 28px);
-    /* 确保动画中心点就是文字中心 */
     transform-origin: center center;
   }
 
@@ -99,7 +101,7 @@
   }
 
   .name .char:nth-child(1) { animation-delay: 0.8s; }
-  .name .char:nth-child(2) { animation-delay: 1.4s; } /* 逸 */
+  .name .char:nth-child(2) { animation-delay: 1.4s; }
   .name .char:nth-child(3) { animation-delay: 2.0s; }
 
   .creator-credit {
@@ -142,19 +144,19 @@
   .page {
     position: fixed; inset: 0; z-index: 10; background: #ffffff;
     opacity: 0; visibility: hidden; 
-    /* 页面的入场动画：从后方一点一点恢复到正常视角 */
-    transform: scale(1.5);
-    transition: opacity 1s var(--ease), transform 1.2s var(--ease), visibility 1s;
+    /* 初始稍微放大一点点，结合 opacity 过渡，实现对焦感 */
+    transform: scale3d(1.1, 1.1, 1); 
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), visibility 0.8s;
     padding: clamp(24px, 4vw, 64px); 
     overflow-y: auto; 
     -webkit-overflow-scrolling: touch;
+    will-change: transform, opacity;
   }
 
-  /* 当 body 加上 entered 类时，页面显现并还原比例 */
   body.entered .page { 
     opacity: 1; 
     visibility: visible; 
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
 
   .content { display: flex; align-items: flex-start; gap: clamp(28px, 5vw, 72px); flex-wrap: wrap; max-width: 1440px; margin: 0 auto; }
@@ -316,7 +318,6 @@
   .para-card .play-hint svg { width: 12px; height: 12px; fill: var(--ink); }
   .para-card .play-hint span { font-size: 0.65rem; color: var(--ink); font-weight: 500; letter-spacing: 0.05em; }
 
-  /* 三张卡片各自的背景图 */
   .card-peng::before { background-image: url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80'); }
   .card-yu::before { background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80'); }
   .card-yan::before { background-image: url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=80'); }
@@ -469,7 +470,6 @@
   @keyframes pulse { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
 
   /* ============ 状态切换 ============ */
-  /* 注意：cover 的隐藏交给 zoom-through 动画的 forwards 来保持，避免直接闪没 */
   body.entered .cover { pointer-events: none; }
   
   @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
@@ -533,7 +533,6 @@
       <span class="blob b3"></span>
     </div>
     
-    <!-- 大字与标签包裹层 -->
     <div class="title-group">
       <div class="tagline">世界第一暖男</div>
       <h1 class="name">
@@ -549,7 +548,6 @@
       </button>
     </div>
 
-    <!-- 左下角创建者信息 -->
     <div class="creator-credit">由 HYL 创建</div>
   </div>
 
@@ -779,23 +777,21 @@
 
   /* ================= 穿越进入逻辑 ================= */
   enterBtn.addEventListener('click', () => {
-    // 1. 给封面添加穿越动画类
+    // 1. 触发封面极速缩放动画 (0.7s)
     cover.classList.add('zoom-through');
     
-    // 2. 延迟一小段时间（比如 0.8 秒），趁画面还在极速放大、模糊时，切入主页
-    // 主页本身有一个从 scale(1.5) 回落到 scale(1) 的动画，产生穿越后的对焦感
+    // 2. 在 0.4 秒后（缩放进行到一半时），切入主页
+    // 主页有个稍微缩小对焦的动画，与缩放重叠，实现无缝穿越
     setTimeout(() => {
       body.classList.add('entered');
       startSlideshow();
-    }, 800); 
+    }, 400); 
   });
 
-  // 返回封面时，清理穿越动画状态
   backBtn.addEventListener('click', () => {
     body.classList.remove('entered');
     stopSlideshow();
     
-    // 等页面淡出后，恢复封面状态
     setTimeout(() => {
       cover.classList.remove('zoom-through');
     }, 800);
